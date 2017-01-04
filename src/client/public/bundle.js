@@ -57,106 +57,19 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _reactHttpRequest = __webpack_require__(/*! react-http-request */ 178);
+	var _CarouselComponent = __webpack_require__(/*! ./CarouselComponent.jsx */ 229);
 	
-	var _reactHttpRequest2 = _interopRequireDefault(_reactHttpRequest);
-	
-	var _axios = __webpack_require__(/*! axios */ 182);
-	
-	var _axios2 = _interopRequireDefault(_axios);
+	var _CarouselComponent2 = _interopRequireDefault(_CarouselComponent);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var jsonData = {};
 	
-	var data = _axios2.default.get('https://www.propertyfinder.ae/en/find-broker/ajax/search?page=1').then(function (jsondata) {
-	    return jsonData = jsondata;
-	});
-	
-	var CarouselBlock = _react2.default.createClass({
-	    displayName: 'CarouselBlock',
-	    getInitialState: function getInitialState() {
-	        return {
-	            jsonData: null
-	        };
-	    },
-	    componentDidMount: function componentDidMount() {
-	        var _this = this;
-	
-	        _axios2.default.get('https://www.propertyfinder.ae/en/find-broker/ajax/search?page=1').then(function (res) {
-	            var jsonData = res;
-	            _this.setState({ jsonData: jsonData });
-	        });
-	    },
-	    render: function render() {
-	
-	        var carouselblock = {};
-	
-	        var listItems = void 0;
-	        var slideToPoints = [];
-	        var slideToLinks = [];
-	        if (this.state.jsonData !== null) {
-	            slideToLinks = function slideToLinks(item, index, first) {
-	                console.log('fired ', index.length, first.length);
-	                return slideToPoints.push(_react2.default.createElement('li', { key: index.id, 'data-target': '#carousel-example-generic', 'data-slide-to': index, className: first }));
-	            };
-	
-	            listItems = this.state.jsonData.data.data.map(function (item, index) {
-	                var first = index == 0 ? 'active carousel-item' : 'carousel-item';
-	
-	                if (index.length !== 'undefined' && first.length !== 'undefined') {
-	                    slideToLinks(item, index, first);
-	                }
-	
-	                return _react2.default.createElement(
-	                    'div',
-	                    { key: index, className: first },
-	                    _react2.default.createElement('img', { alt: item.name, src: item.links.logo })
-	                );
-	            });
-	
-	            console.log(slideToLinks());
-	        }
-	
-	        return _react2.default.createElement(
-	            'div',
-	            { id: 'carousel-example-generic', className: 'carousel slide', 'data-ride': 'carousel' },
-	            _react2.default.createElement(
-	                'ol',
-	                { className: 'carousel-indicators' },
-	                jsonData.statusCode,
-	                slideToPoints
-	            ),
-	            _react2.default.createElement(
-	                'div',
-	                { className: 'carousel-inner', role: 'listbox' },
-	                listItems
-	            ),
-	            _react2.default.createElement(
-	                'a',
-	                { className: 'left carousel-control', href: '#carousel-example-generic', role: 'button', 'data-slide': 'prev' },
-	                _react2.default.createElement('span', { className: 'icon-prev', 'aria-hidden': 'true' }),
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'sr-only' },
-	                    'Previous'
-	                )
-	            ),
-	            _react2.default.createElement(
-	                'a',
-	                { className: 'right carousel-control', href: '#carousel-example-generic', role: 'button', 'data-slide': 'next' },
-	                _react2.default.createElement('span', { className: 'icon-next', 'aria-hidden': 'true' }),
-	                _react2.default.createElement(
-	                    'span',
-	                    { className: 'sr-only' },
-	                    'Next'
-	                )
-	            )
-	        );
-	    }
-	});
-	
-	_reactDom2.default.render(_react2.default.createElement(CarouselBlock, null), document.getElementById('app'));
+	_reactDom2.default.render(_react2.default.createElement(
+	    'div',
+	    null,
+	    _react2.default.createElement(_CarouselComponent2.default, null)
+	), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -25270,6 +25183,288 @@
 	  };
 	};
 
+
+/***/ },
+/* 207 */
+/*!************************************************!*\
+  !*** ./src/client/app/NavigationComponent.jsx ***!
+  \************************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 1);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _react = __webpack_require__(/*! react */ 177);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactHttpRequest = __webpack_require__(/*! react-http-request */ 178);
+	
+	var _reactHttpRequest2 = _interopRequireDefault(_reactHttpRequest);
+	
+	var _axios = __webpack_require__(/*! axios */ 182);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	var _CarouselComponent = __webpack_require__(/*! ./CarouselComponent.jsx */ 229);
+	
+	var _CarouselComponent2 = _interopRequireDefault(_CarouselComponent);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var jsonDataLocation = {};
+	var selectedCity = {};
+	
+	var NavigationBlock = _react2.default.createClass({
+	    displayName: 'NavigationBlock',
+	    filterItems: function filterItems(e) {
+	        this.setState({ selectedCity: e.target.value });
+	        this.props.onFilter(e);
+	    },
+	    getInitialState: function getInitialState() {
+	        return {
+	            selectedCity: null
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var selectedCity = null;
+	    },
+	    render: function render() {
+	        var _this = this;
+	
+	        var navLocationNames = [];
+	
+	        if (this.props.jsonDataNav !== null) {
+	
+	            jsonDataLocation = this.props.jsonDataNav.map(function (item) {
+	                return item.location;
+	            }).filter(function (elem, pos, arr) {
+	                return arr.indexOf(elem) == pos;
+	            }).forEach(function (item, index) {
+	                navLocationNames.push(_react2.default.createElement(
+	                    'li',
+	                    { key: index },
+	                    _react2.default.createElement(
+	                        'button',
+	                        { value: item, onClick: _this.filterItems },
+	                        item
+	                    )
+	                ));
+	            });
+	        }
+	
+	        return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(
+	                'nav',
+	                null,
+	                _react2.default.createElement(
+	                    'ul',
+	                    null,
+	                    navLocationNames,
+	                    _react2.default.createElement(
+	                        'li',
+	                        null,
+	                        _react2.default.createElement(
+	                            'button',
+	                            { value: 'All', onClick: this.filterItems },
+	                            'All'
+	                        )
+	                    )
+	                )
+	            ),
+	            _react2.default.createElement(
+	                'p',
+	                null,
+	                'you have selected ',
+	                _react2.default.createElement(
+	                    'span',
+	                    { className: 'selectedCity' },
+	                    this.state.selectedCity
+	                )
+	            )
+	        );
+	    }
+	});
+	
+	exports.default = NavigationBlock;
+
+/***/ },
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */,
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */
+/*!**********************************************!*\
+  !*** ./src/client/app/CarouselComponent.jsx ***!
+  \**********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var _reactDom = __webpack_require__(/*! react-dom */ 1);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _react = __webpack_require__(/*! react */ 177);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactHttpRequest = __webpack_require__(/*! react-http-request */ 178);
+	
+	var _reactHttpRequest2 = _interopRequireDefault(_reactHttpRequest);
+	
+	var _axios = __webpack_require__(/*! axios */ 182);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	var _NavigationComponent = __webpack_require__(/*! ./NavigationComponent.jsx */ 207);
+	
+	var _NavigationComponent2 = _interopRequireDefault(_NavigationComponent);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var CarouselBlock = _react2.default.createClass({
+	    displayName: 'CarouselBlock',
+	    getInitialState: function getInitialState() {
+	        return {
+	            jsonData: null,
+	            jsonDataNav: null
+	        };
+	    },
+	    componentDidMount: function componentDidMount() {
+	        var _this = this;
+	
+	        //Axios.get('https://www.propertyfinder.ae/en/find-broker/ajax/search?page=1')
+	        _axios2.default.get('propertyFinder.json').then(function (res) {
+	            var jsonData = res.data.data;
+	            var jsonDataNav = res.data.data;
+	            _this.setState({ jsonData: jsonData });
+	            _this.setState({ jsonDataNav: jsonDataNav });
+	        });
+	    },
+	    onFilter: function onFilter(e) {
+	        this.setState({ jsonData: this.state.jsonDataNav });
+	
+	        if (this.state.jsonData !== null) {
+	            var jsonDataCopy = this.state.jsonDataNav.slice();
+	            var jsonData = this.state.jsonData;
+	
+	            if (e.target.value !== 'All') {
+	                this.setState({ jsonData: jsonDataCopy.filter(function (item) {
+	                        return item.location == e.target.value;
+	                    }) });
+	            }
+	        }
+	    },
+	    render: function render() {
+	        var _this2 = this;
+	
+	        var listItems = void 0;
+	        var slideToPoints = [];
+	
+	        if (this.state.jsonData !== null) {
+	            (function () {
+	
+	                var slideToLinks = function slideToLinks(item, index, first) {
+	                    if (typeof item !== 'undefined') return slideToPoints.push(_react2.default.createElement('li', { key: item.id, 'data-target': '#carousel-example-generic', 'data-slide-to': index, className: first }));
+	                };
+	
+	                listItems = _this2.state.jsonData.map(function (item, index) {
+	                    var first = index == 0 ? ' active' : '';
+	                    var carouselClass = 'carousel-item' + first;
+	
+	                    if (index.length !== 'undefined' && first.length !== 'undefined') {
+	                        slideToLinks(item, index, first);
+	                    }
+	
+	                    return _react2.default.createElement(
+	                        'div',
+	                        { key: index, className: carouselClass },
+	                        _react2.default.createElement(
+	                            'h1',
+	                            null,
+	                            item.location
+	                        ),
+	                        _react2.default.createElement(
+	                            'p',
+	                            null,
+	                            item.description
+	                        ),
+	                        _react2.default.createElement('img', { alt: item.name, src: item.links.logo })
+	                    );
+	                });
+	            })();
+	        }
+	
+	        return _react2.default.createElement(
+	            'div',
+	            null,
+	            _react2.default.createElement(_NavigationComponent2.default, { jsonDataNav: this.state.jsonDataNav, onFilter: this.onFilter }),
+	            _react2.default.createElement(
+	                'div',
+	                { id: 'carousel-example-generic', className: 'carousel slide', 'data-ride': 'carousel' },
+	                _react2.default.createElement(
+	                    'ol',
+	                    { className: 'carousel-indicators' },
+	                    slideToPoints
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'carousel-inner', role: 'listbox' },
+	                    listItems
+	                ),
+	                _react2.default.createElement(
+	                    'a',
+	                    { className: 'left carousel-control', href: '#carousel-example-generic', role: 'button', 'data-slide': 'prev' },
+	                    _react2.default.createElement('span', { className: 'icon-prev', 'aria-hidden': 'true' }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'sr-only' },
+	                        'Previous'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'a',
+	                    { className: 'right carousel-control', href: '#carousel-example-generic', role: 'button', 'data-slide': 'next' },
+	                    _react2.default.createElement('span', { className: 'icon-next', 'aria-hidden': 'true' }),
+	                    _react2.default.createElement(
+	                        'span',
+	                        { className: 'sr-only' },
+	                        'Next'
+	                    )
+	                )
+	            )
+	        );
+	    }
+	});
+	
+	module.exports = CarouselBlock;
 
 /***/ }
 /******/ ]);

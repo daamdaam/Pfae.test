@@ -1,5 +1,5 @@
-[{
-    "data": [
+{
+        "data": [
         {
             "slug": "better-homes-llc-dxb",
             "id": 657,
@@ -178,7 +178,7 @@
             "licenseLabel": "RERA",
             "licenseNumber": "1933",
             "phone": "+971 4 3233609",
-            " c": {
+            "links": {
                 "self": "\/en\/broker\/provident-real-estate-336",
                 "logo": "https:\/\/www.propertyfinder.ae\/images\/pf_broker\/logo\/6f795a6bfcd14af0378afa6b557b30c960bc3c40\/desktop",
                 "logo2x": "https:\/\/www.propertyfinder.ae\/images\/pf_broker\/logo\/6f795a6bfcd14af0378afa6b557b30c960bc3c40\/desktop2x"
@@ -469,4 +469,4 @@
             "perPage": 20
         }
     }
-}]
+}
