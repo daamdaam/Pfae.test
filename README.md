@@ -5,9 +5,9 @@ $ npm run build
 
 To run the app you need to have a local http server ('npm i http-server -g' is a good http server to execute an assigned folder as a docroot)
 
-## NOTES
+go to http://127.0.0.1:PORTNO/
 
-goto http://127.0.0.1:PORTNO/
+## NOTES
 
 Please download and store the response data from the following API endpoint into a data.json file that can you should use to consume the data: 
  
