@@ -1,3 +1,14 @@
+## Installation and execution
+$ npm i
+
+$ npm run build
+
+To run the app you need to have a local http server ('npm i http-server -g' is a good http server to execute an assigned folder as a docroot)
+
+## NOTES
+
+goto http://127.0.0.1:PORTNO/
+
 Please download and store the response data from the following API endpoint into a data.json file that can you should use to consume the data: 
  
 You will display the results showing the brokers logo and any other broker information you want in a carousel similar to:
