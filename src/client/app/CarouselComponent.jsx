@@ -14,7 +14,7 @@ const CarouselBlock = React.createClass({
     },
 
     componentDidMount() {
-        //Axios.get('https://www.propertyfinder.ae/en/find-broker/ajax/search?page=1')
+        //Axios.get('https://www.propertyfinder.ae/URL/TO/JSON')
         Axios.get('propertyFinder.json')
             .then(res => {
                 const jsonData = res.data.data;
